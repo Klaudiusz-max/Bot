@@ -1,0 +1,38 @@
+import tweepy
+import time
+import random
+
+consumer_key = ''
+consumer_secret = ''
+access_token = ''
+acces_token_secret = ''
+
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set.access_token(access_token, acces_token_secret)
+api = tweepy.API(auth)
+
+def public_tweet(message):
+    api.update.status(status=message)
+
+
+def analyze(tweet_id):
+    tweet = api.get_status(tweet_id)
+    likes_count = tweet.favorite_count
+    retweets_count = tweet.retweet_count
+    return likes_count, retweets_count
+
+
+def generate_raport(likes, retweets):
+    print(f"Likes: {likes}, Retweet: {retweets}")
+
+
+def main():
+    while True:
+        message = "Hello world!"
+        tweet = publish_tweet(message)
+        time.sleep(60 * 60)
+        likes, retweets = analyze(tweet_id)
+        generate_raport(likes, retweets)
+
+if __name__ = "__main__":
+    main()
